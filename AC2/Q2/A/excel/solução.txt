@@ -1,0 +1,48 @@
+Etapas detalhadas da implementação do Excel:
+
+Entrada de dados
+
+Tabela "Dados das Fazendas"
+Coluna A: Nomes das fazendas (f1, f2, f3)
+Coluna B: Área total da fazenda (435, 405, 379)
+Coluna C: Água disponível (850, 430, 670)
+
+Tabela "Dados de Cultivo"
+Coluna A: Nomes das culturas (Milho, Arroz, Feijão)
+Coluna B: Área máxima da cultura (66, 55, 79)
+Coluna C: Consumo de água por cultura (2,4, 2,9, 5,2)
+Coluna D: Lucro por área da cultura (3150, 2500, 2650)
+
+Tabela "Matriz de área plantada" (células B9:D11) - são as variáveis do solver
+
+Fórmulas de restrição
+
+Restrição de água (coluna G. células G3:G5):
+G3: =SUMPRODUCT(C14:C16; TRANSPOSE(B9:D9)) | G3 <= C2
+G4: =SUMPRODUCT(Dados_de_Cultivo[consumo de água];TRANSPOSE(B10:D10)) | G4 <= C3
+G5: =SUMPRODUCT(C14:C16;TRANSPOSE(B11:D11)) | G5 <= C4
+Verifica o uso de água em relação ao limite de água da fazenda
+
+Restrição de área (coluna H, células H3:H5):
+H3: =SUM(B9:D9) <= B2
+H4: =SUM(B10:D10) <= B3
+H5: =SUM(B11:D11) <= B4
+Garante que a área total plantada não exceda a área da fazenda
+
+Restrição de área de cultivo (coluna I, células I3:I5):
+I3: =SUM(Matriz_de_Áreas_Plantadasde_Áreas_Plantadas[milho]) <= B14
+I4: =SUM(Matriz_de_Áreas_Plantadasde_Áreas_Plantadas[arroz]) <= B15
+I5: =SUM(Matriz_de_Áreas_Plantadasde_Áreas_Plantadas[feijão]) <= B16
+Limita a área total para cada cultivo
+
+Função objetivo (lucro total)
+Célula J3: =SUMPRODUCT(D14:D16; B9:B11) + SUMPRODUCT(D14:D16; C9:C11) + SUMPRODUCT(D14:D16; C9:C11)
+
+Configuração do Solver
+Objetivo: Maximizar J3
+Variáveis: B9:D11
+Restrições:
+G3:G5 <= Limites de água
+H3:H5 <= Áreas da fazenda
+I3:I5 <= Áreas máximas de cultivo
+B9:D11 >= 0

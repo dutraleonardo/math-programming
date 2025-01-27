@@ -1,0 +1,46 @@
+Define a estrutura da rede com refinarias (R1-R3), estações de bombeamento (P1-P3) e terminais (T1-T2)
+Configura restrições de conservação de fluxo em cada estação de bombeamento
+Aplica restrições de capacidade em cada segmento de oleoduto
+Maximiza o fluxo total que chega aos terminais
+
+Quando você executa este modelo no AMPL, ele irá:
+
+Calcular o fluxo máximo possível através da rede
+Mostrar a taxa de produção necessária em cada refinaria
+Mostrar a demanda que pode ser satisfeita em cada terminal
+Exibir o fluxo através de cada segmento de oleoduto
+
+O modelo considera:
+
+Direção do fluxo (conforme mostrado pelas setas no diagrama)
+Capacidades do segmento de oleoduto
+Conservação do fluxo em estações de bombeamento
+A possibilidade de fluxo entre terminais (T1 a T2)
+
+Ao executar, obtivemos o seguinte resultado
+
+=== Análise de Fluxo Máximo ===
+
+Taxas de produção da refinaria (milhões de barris/dia):
+Refinery R1: 33.0
+Refinery R2: 51.0
+Refinery R3: 13.0
+
+Demandas terminais (milhões de barris/dia):
+Terminal T1: 51.0
+Terminal T2: 46.0
+
+Utilização do gasoduto:
+Flow R1 -> P1: 21.0 / 21.0
+Flow R1 -> P2: 12.0 / 12.0
+Flow R2 -> P1: 15.0 / 17.0
+Flow R2 -> P2: 23.0 / 23.0
+Flow R2 -> P3: 13.0 / 13.0
+Flow R3 -> P3: 13.0 / 13.0
+Flow P1 -> T1: 17.0 / 17.0
+Flow P1 -> P2: 19.0 / 19.0
+Flow P2 -> T1: 25.0 / 25.0
+Flow P2 -> P3: 29.0 / 31.0
+Flow P3 -> T1: 47.0 / 47.0
+Flow P3 -> T2: 8.0 / 27.0
+Flow T1 -> T2: 38.0 / 38.0

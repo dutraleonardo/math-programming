@@ -1,0 +1,32 @@
+# Dados
+data;
+
+set FARMS := f1 f2 f3;
+set CROPS := milho arroz feijao;
+
+param area := 
+f1 435
+f2 405
+f3 379;
+
+param water :=
+f1 850
+f2 430
+f3 670;
+
+param crop_max_area :=
+milho 66
+arroz 55
+feijao 79;
+
+param crop_water_consumption :=
+milho 2.4
+arroz 2.9
+feijao 5.2;
+
+param crop_profit :=
+milho 3150
+arroz 2500
+feijao 2650;
+
+end;

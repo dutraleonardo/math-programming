@@ -1,0 +1,14 @@
+planted_area[i,j] :=
+f1 arroz    19.63
+f1 feijao   19.63
+f1 milho    19.63
+f2 arroz    18.27
+f2 feijao   18.27
+f2 milho    18.27
+f3 arroz    17.1
+f3 feijao   17.1
+f3 milho    17.1
+;
+
+total_profit = 456500
+

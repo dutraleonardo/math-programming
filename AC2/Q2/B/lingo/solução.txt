@@ -1,0 +1,87 @@
+Para executar e interpretar isso no LINGO:
+
+Abra o LINGO e cole o código do modelo
+Clique no botão "Resolver" (ou pressione F5)
+
+Para interpretar os resultados:
+
+LINGO dirá se encontrou uma solução ótima global
+O valor objetivo mostra o lucro máximo em unidades monetárias
+Os valores da variável mostram:
+
+X = número ótimo de disjuntores de 20A
+Y = número ótimo de disjuntores de 50A
+
+Os valores de X e Y devem pertencer ao conjunto dos números inteiros não negativos.
+
+O comando @GIN(X) - Força X a ser um inteiro
+O comando @GIN(Y) - Força Y a ser um inteiro
+
+Restrições de não negatividade mantidas:
+X >= 0
+Y >= 0
+
+Variáveis ​​binárias BX e BY mantidas para as restrições 0 ou ≥ 1
+
+Cálculo da receita:
+Para X: X(15 - 0,63X)
+Para Y: Y(21 - 0,17Y)
+
+Cálculo do custo: 1,45X - 1,2Y + 1,15X³Y²
+Lucro = Receita - Custo
+
+Nossos resultados foram:
+X = 0
+Y = 65
+Lucro = 724.75
+
+Ao executar, o retorno deverá ser semelhante ao apresentado abaixo.
+ 
+  LINGO/LNX64 20.0.8 (17 Oct 2022), LINDO API 14.0.5099.179
+
+  Licensee info: Eval Use Only
+  License expires: 25 JUL 2025
+
+  Local optimal solution found.
+  Objective value:                              724.7500
+  Objective bound:                              724.7500
+  Infeasibilities:                              0.000000
+  Extended solver steps:                               6
+  Total solver iterations:                           175
+  Elapsed runtime seconds:                          0.07
+
+  Model Class:                                     MINLP
+
+  Total variables:                      7
+  Nonlinear variables:                  2
+  Integer variables:                    4
+
+  Total constraints:                   15
+  Nonlinear constraints:                1
+
+  Total nonzeros:                      28
+  Nonlinear nonzeros:                   2
+
+  Linearization components added:
+      Constraints:                      8
+      Variables:                        2
+
+
+
+                                Variable           Value        Reduced Cost
+                                       X        0.000000           -13.55000
+                                       Y        65.00000          -0.1000003
+                                      BX        0.000000            0.000000
+                                      BY        1.000000            0.000000
+                                       M        65.00000            0.000000
+
+                                     Row    Slack or Surplus      Dual Price
+                                       1        724.7500            1.000000
+                                       2        0.000000            0.000000
+                                       3        0.000000            0.000000
+                                       4        64.00000            0.000000
+                                       5        0.000000            0.000000
+                                       6        0.000000            0.000000
+                                       7        65.00000            0.000000
+
+

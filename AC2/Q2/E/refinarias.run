@@ -1,0 +1,22 @@
+# Solve commands
+cd <path para a pasta dos arquivos>;
+model refinarias.mod;
+data refinarias.dat;
+
+option solver cplex;
+solve;
+
+printf "\n=== Análise de Fluxo Máximo ===\n";
+
+printf "\nTaxas de produção da refinaria (milhões de barris/dia):\n";
+printf {r in REFINERIES}: 
+    "Refinery %s: %.1f\n", r, sum {(r,j) in ARCS} flow[r,j];
+
+printf "\nDemandas terminais (milhões de barris/dia):\n";
+printf {t in TERMINALS}:
+    "Terminal %s: %.1f\n", t, sum {(i,t) in ARCS} flow[i,t] - 
+    (if t = "T1" then sum {(t,j) in ARCS} flow[t,j] else 0);
+
+printf "\nUtilização do gasoduto:\n";
+printf {(i,j) in ARCS}: 
+    "Flow %s -> %s: %.1f / %.1f\n", i, j, flow[i,j], capacity[i,j];

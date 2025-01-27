@@ -1,0 +1,17 @@
+# Commands to solve and display results
+model /home/leonardo-dutra/Documentos/UECE/PM/AC2/Q2/B/ampl/disjuntores.mod;
+
+option solver knitro;  # ou outro MINLP solver
+solve;
+
+printf "\n=== Solution Report ===\n";
+printf "Disjuntores do tipo X (20A): %d unidades\n", X;
+printf "Disjuntores do tipo X (50A): %d unidades\n", Y;
+printf "Lucro máximo: $%.2f\n", Profit;
+
+printf "\nAnálise Detalhada:\n";
+printf "Receita de X (20A): $%.2f\n", X*(15 - 0.63*X);
+printf "Receita de Y (50A): $%.2f\n", Y*(21 - 0.17*Y);
+printf "Custo: $%.2f\n", (1.45*X - 1.2*Y + 1.15*X^3*Y^2);
+printf "Preço de venda X (20A): $%.2f por unidade\n", (15 - 0.63*X);
+printf "Preço de venda Y (50A): $%.2f por unidade\n", (21 - 0.17*Y);

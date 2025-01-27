@@ -1,0 +1,53 @@
+MODEL: 
+
+TITLE: 2A-Fazendas;
+
+SETS:
+fazendas: area, agua;
+culturas: areaCultivo, consumo, lucro;
+plantacao(fazendas, culturas): areaPlantada;
+ENDSETS
+
+DATA:
+fazendas area agua = 
+f1 435 850
+f2 405 430
+f3 379 670;
+
+culturas areaCultivo consumo lucro = 
+milho 66 2.4 3150
+arroz 55 2.9 2500
+feijao 79 5.2 2650;
+ENDDATA
+
+MAX = @SUM(plantacao(i, j): lucro(j) * areaPlantada(i, j));
+
+@FOR(fazendas(i): @SUM(plantacao(i, j): consumo(j) * areaPlantada(i, j)) <= agua(i));
+@FOR(fazendas(i): @SUM(plantacao(i, j): areaPlantada(i, j)) <= area(i));
+@FOR(culturas(j): @SUM(plantacao(i, j): areaPlantada(i, j)) <= areaCultivo(j));
+
+! Manter proporcao de area cultivada entre as plantacoes;
+@FOR(plantacao(i, j): @FOR(plantacao(k, w): @SUM(fazendas(i): areaPlantada(i, j)) / area(i) = 
+@SUM(fazendas(k): areaPlantada(k, w)) / area(k)));
+
+! EXPLICACAO DA SOLUCAO;
+
+! A partir do modelo feito podemos concluir que todas as fazendas vao plantar quantidades propocionais de cada cultura
+sempre obdecendo as limitacoes de agua, area disponivel para cultivo de cada cultura e a area em si da fazenda. 
+O valor encontrado pela funcao objetivo foi de 456500.0, que representa o lucro obtido com as plantacoes.
+Na funcao objetivo temos a somatoria do valor comercial de cada cultura multiplicado pela quantidade de area plantada de cada producao 
+que corresponde a quantidade da cultura x plantada na fazenda y.
+
+* Definos tres SET'S, sao eles:
+
+- Fazendas: Representa as fazendas por meio de sua area e agua disponiveis.
+- Culturas:  Representa as culturas por meio da area de cultivo, consumo e retorno financeiro.
+- Plantacao: Variavel de decisao que diz quantos hectares de uma cultura foi plantada em uma fazenda.
+
+* Restricoes
+
+- Restricao de agua: Na linha 25 podemos verificar que cada fazenda consome apenas uma quantidade igual ou inferior de agua disponivel.
+- Restricao de area de cada fazenda: Na linha 26 a area plantada de cada fazenda tem que ser menor do que a area total da mesma.
+- Restricao da area de cultivo da cultura: Na linha 27 podemos verificar que cada cultura tem um limite de hectares a serem plantados.
+- Restricao de proporcionalidade: Nas linhas 30 e 31 nos mantemos a proporcao da area plantada de cada fazenda, ou seja, 
+cada fazenda tem a mesma porcentagem de area plantada;

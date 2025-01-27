@@ -1,0 +1,18 @@
+model fazendas.mod;
+data fazendas.dat;
+
+# Define quem vai resolver o problema
+option solver cplex;
+
+solve;
+
+# Mostra os resultados
+display total_profit;
+display planted_area;
+display water_constraint;
+display area_constraint;
+display crop_area_constraint;
+
+# Escreve os resultados em um arquivo
+option display_precision 4;
+display {i in FARMS, j in CROPS} planted_area[i,j], total_profit > solution_output.txt;

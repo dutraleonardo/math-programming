@@ -1,0 +1,32 @@
+# Data section
+data;
+
+# Define nodes
+set NODES := R1 R2 R3    # Refinarias
+             P1 P2 P3    # Estações de bombeamento
+             T1 T2;      # Terminais
+
+# Define refinarias and terminais
+set REFINERIES := R1 R2 R3;
+set TERMINALS := T1 T2;
+
+# Defina arcos e suas capacidades
+set ARCS :=
+    (R1,P1) (R1,P2)
+    (R2,P1) (R2,P2) (R2,P3)
+    (R3,P3)
+    (P1,T1)
+    (P1,P2)
+    (P2,T1) (P2,P3)
+    (P3,T1) (P3,T2)
+    (T1,T2);
+
+param capacity :=
+    [R1,P1] 21  [R1,P2] 12
+    [R2,P1] 17  [R2,P2] 23  [R2,P3] 13
+    [R3,P3] 13
+    [P1,T1] 17
+    [P1,P2] 19
+    [P2,T1] 25  [P2,P3] 31
+    [P3,T1] 47  [P3,T2] 27
+    [T1,T2] 38;

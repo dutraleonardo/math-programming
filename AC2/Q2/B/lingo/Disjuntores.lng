@@ -1,0 +1,32 @@
+MODEL:
+! Otimização da fabricação de disjuntores;
+
+! Variáveis de decisão;
+! X = número de disjuntores de 20A (integer);
+! Y = número de disjuntores de 50A (integer);
+! BX, BY = variáveis binárias para controlar se X,Y são 0 ou >=1;
+
+! Restrições para definir inteiros e binários;
+@GIN(X);  ! X deve ser inteiro;
+@GIN(Y);  ! Y deve ser inteiro;
+@BIN(BX); ! BX é binário (0 ou 1);
+@BIN(BY); ! BY é binário (0 ou 1);
+
+! Função objetivo (maximizar lucro);
+MAX = X*(15 - 0.63*X) + Y*(21 - 0.17*Y) - (1.45*X - 1.2*Y + 1.15*X^3*Y^2);
+
+! Restrições para X: ambos 0 ou >= 1;
+X >= BX;       ! quando BX=1, X deverá ser >= 1;
+X <= M*BX;     ! quando BX=0, X deverá ser 0;
+               ! M é um número grande (e.g., 1000);
+
+! Restrições para Y: ambos 0 ou >= 1;
+Y >= BY;       ! quando BY=1, Y deverá ser >= 1;
+Y <= M*BY;     ! quando BY=0, Y deverá ser 0;
+               ! M é um número grande (e.g., 1000);
+
+! Restrições de não negatividade (redundantes, mas explícitas);
+X >= 0;
+Y >= 0;
+
+END
